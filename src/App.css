@@ -146,3 +146,8 @@ td img {
   text-decoration: none;
   cursor: pointer;
 }
+
+button {  
+  padding: 12px 15px;
+  margin : auto;
+}
