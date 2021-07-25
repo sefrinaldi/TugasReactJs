@@ -1,0 +1,17 @@
+.navbar {
+    display: flex;
+    justify-content: center;
+    margin : 10px;
+}
+
+.navbar > .menu {
+    border: 1px solid #009879;
+    padding : 12px 15px;
+    margin: 10px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+  
+.menu.active {
+    background-color: #009879;
+}

@@ -1,17 +1,30 @@
 import './App.css';
-import Login from './Login.js'
 import React, { Component } from 'react';
-import Table from './Table';
-import DataTable from './DataTable';
+// import { Register, Login } from './pages';
+import { Body, Navbar } from './templates'
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      currentPage : "register"
+    }
+  }
+
+  changePage = page => {
+    console.log("in App", page)
+    this.setState ({
+      currentPage : page
+    })
+  }
+
   render() {
     return (
       <>
-        <Login />
+        <Navbar page={this.state.currentPage} goToPage={this.changePage} />
+        <Body page={this.state.currentPage} goToPage={this.changePage}/>
         <br/>
-        <Table />
-        <DataTable />
+               
       </>
     );
   }
