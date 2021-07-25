@@ -40,10 +40,22 @@ export default class Body extends Component {
         console.log("data regis",inputUser.fullname);
     }
 
+    deleteUser = id => {
+        const newUser = this.state.userList
+        .filter(user => user.id !== id)
+        .map(filterUser => {
+            return filterUser
+        })
+
+        this.setState({
+            userList : newUser
+        })
+    }
+
     loginUser = data => {
         console.log(data);
 
-        const dataLogin = this.state.userList.filter(user => user.username === data.dataUser && user.password === data.dataPass)    
+        const dataLogin = this.state.userList.filter(user => user.username === data.dataUser && user.password === data.dataPass)                  
 
         console.log(dataLogin);        
 
@@ -73,7 +85,7 @@ export default class Body extends Component {
         if (page === "register") 
             return <Register regis={this.addUser} redirect={this.props.goToPage}/>
         else if (page === "home")
-            return <User userList={this.state.userList}/>
+            return <User userList={this.state.userList} deleteUser={this.deleteUser}/>
         else
             return <Login logUser={this.loginUser}/>
     }

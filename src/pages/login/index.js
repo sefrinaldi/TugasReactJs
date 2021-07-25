@@ -1,25 +1,6 @@
 import React, { Component } from 'react'
 
-export default class Login extends Component {
-
-    // onCheckLogin = (text) => {
-    //     text.preventDefault()
-    //     const dataUser = text.target.username.value
-    //     const dataPass = text.target.password.value
-
-        // if (!dataUser)
-        //     alert("Username Kosong")
-        // else if (!dataPass)
-        //     alert("Password Kosong")
-        // else if (dataUser === "admin" && dataPass === "password") {
-        //     alert("Login Berhasil")
-        //     text.target.username.value = ""
-        //     text.target.password.value = ""
-        // }
-        // else
-        //     alert("Login Gagal")
-
-    // }
+export default class Login extends Component {    
     
     onCheckLogin = data => {
         data.preventDefault()

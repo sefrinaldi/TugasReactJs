@@ -15,6 +15,8 @@ export default class Register extends Component {
         
         alert("Registrasi berhasil")
 
+        this.props.redirect("login")
+
         data.target.fullname.value = ""
         data.target.username.value = ""
         data.target.password.value = ""     

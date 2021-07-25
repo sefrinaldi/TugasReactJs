@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './user.css';
 
 class User extends Component {
     constructor(props) {
@@ -46,8 +47,9 @@ class User extends Component {
                                     <td align="center">{userlist.id}</td>
                                     <td>{userlist.fullname}</td>
                                     <td>{userlist.username}</td>
-                                    <td>
-                                        
+                                    <td align="center" width="200px">
+                                        <button>Edit</button>
+                                        <button onClick={()=> this.props.deleteUser(userlist.id)}>Delete</button>
                                     </td>
                                 </tr>
                             );
