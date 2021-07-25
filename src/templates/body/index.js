@@ -17,7 +17,13 @@ export default class Body extends Component {
                     fullname : "Robi",
                     username : "robi",
                     password : "password"
-                }
+                },
+                {
+                    id : 3,
+                    fullname : "john",
+                    username : "john",
+                    password : "password"
+                }        
             ],
             data: [1, 2]
         }
@@ -38,6 +44,10 @@ export default class Body extends Component {
             }]
         })
         console.log("data regis",inputUser.fullname);
+    }
+
+    editUser = (id, fullname, username) => {
+        
     }
 
     deleteUser = id => {
