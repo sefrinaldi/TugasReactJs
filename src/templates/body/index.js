@@ -5,28 +5,47 @@ export default class Body extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userList: [
-                {           
-                    id : 1,         
-                    fullname: "Antoni",
-                    username: "toni",
-                    password: "password"
-                },
-                {          
-                    id : 2,          
-                    fullname : "Robi",
-                    username : "robi",
-                    password : "password"
-                },
-                {
-                    id : 3,
-                    fullname : "john",
-                    username : "john",
-                    password : "password"
-                }        
-            ],
-            data: [1, 2]
+            // userList: [
+            //     {           
+            //         id : 1,         
+            //         fullname: "Antoni",
+            //         username: "toni",
+            //         password: "password"
+            //     },
+            //     {          
+            //         id : 2,          
+            //         fullname : "Robi",
+            //         username : "robi",
+            //         password : "password"
+            //     },
+            //     {
+            //         id : 3,
+            //         fullname : "john",
+            //         username : "john",
+            //         password : "password"
+            //     }        
+            // ],
+            userList : {}
         }
+    }
+
+    componentDidMount = () => {
+        fetch('https://jsonplaceholder.typicode.com/users')
+            .then(response => response.json())
+            .then(json => {
+                this.setState({
+                    userList : json.map(user => {
+                        return {
+                            id : user.id,
+                            name : user.name,
+                            username : user.username,
+                            password : "12345",
+                            address : user.address.city,
+                            loginStatus : false
+                        }
+                    })
+                })
+            })            
     }
 
     addUser = inputUser => {
@@ -108,7 +127,7 @@ export default class Body extends Component {
     }
 
     render() {
-        
+        console.log("data", this.state.userList);
         return (
             <div className="body">
                 {this.renderPage()}                               

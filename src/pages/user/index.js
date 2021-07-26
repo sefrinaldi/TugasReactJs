@@ -37,6 +37,7 @@ class User extends Component {
                             <td>id</td>
                             <td>Fullname</td>
                             <td>Username</td>
+                            <td>Address</td>
                             <td>Action</td>
                         </tr>
                     </thead>
@@ -45,8 +46,9 @@ class User extends Component {
                             return (
                                 <tr key={index}>
                                     <td align="center">{userlist.id}</td>
-                                    <td>{userlist.fullname}</td>
+                                    <td>{userlist.name}</td>
                                     <td>{userlist.username}</td>
+                                    <td>{userlist.address}</td>
                                     <td align="center" width="200px">
                                         <button>Edit</button>
                                         <button onClick={()=> this.props.deleteUser(userlist.id)}>Delete</button>
