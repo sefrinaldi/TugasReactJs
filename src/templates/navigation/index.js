@@ -37,7 +37,10 @@ export default class Navbar extends Component {
 
         if (checkUser) 
             return (
-                <Menu redirect={()=> userLogout()}>Logout</Menu>
+                <>
+                    <Menu redirect={()=> userLogout()}>Logout</Menu>
+                    <Menu isActivePage={this.checkActivePage("edit")} redirect={() => goToPage("edit")}>Form</Menu>
+                </>
             )
         return (
             <>
@@ -58,8 +61,8 @@ export default class Navbar extends Component {
                 </Menu> */}
                 {this.onCheckLogin()}
                 {this.onCheckLogout()}
-                {/* <Menu isActivePage={this.checkActivePage("Login")} redirect={() => goToPage("Login")}>Login</Menu>
-                <Menu isActivePage={this.checkActivePage("register")} redirect={() => goToPage("register")}>Register</Menu> */}
+                {/* <Menu isActivePage={this.checkActivePage("Login")} redirect={() => goToPage("Login")}>Login</Menu> */}
+                {/* <Menu isActivePage={this.checkActivePage("register")} redirect={() => goToPage("register")}>Register</Menu> */}
             </div>
         )
     }

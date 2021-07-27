@@ -71,6 +71,7 @@ class App extends Component {
           checkUser={this.state.userLogin.loginStatus}
         />
         <Body
+          idLog={this.state.userLogin.id}
           page={this.state.currentPage}
           goToPage={this.changePage}
           updateLogin={this.updateLogin}

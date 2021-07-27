@@ -1,0 +1,15 @@
+.editbtn {
+    background-color: #2196F3;
+}
+
+.editbtn:hover {
+    background: #0b7dda;
+}
+
+.deletebtn {
+    background-color: #f44336;
+}
+
+.deletebtn:hover {
+    background: #da190b;
+}

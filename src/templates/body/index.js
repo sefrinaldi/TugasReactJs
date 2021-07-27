@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Register, Login, User } from '../../pages'
+import { Register, Login, User, Edit } from '../../pages'
 
 export default class Body extends Component {
     constructor(props) {
@@ -25,7 +25,8 @@ export default class Body extends Component {
             //         password : "password"
             //     }        
             // ],
-            userList: {}
+            userList: {},
+            newEdit: {}
         }
         // this.readApi = this.readApi.bind(this)
     }
@@ -125,8 +126,33 @@ export default class Body extends Component {
         console.log("data regis", inputUser.fullname);
     }
 
-    editUser = (id, fullname, username) => {
+    editUser = data => {
+        console.log("edit id body", data);
 
+        this.setState({
+            newEdit : data
+        })
+        this.props.goToPage("edit")
+    }
+
+    updateUser = data => {
+        console.log("update user in body", data);
+
+        const indexEdit = this.state.userList.findIndex(user => user.id === data.id)
+        console.log("index user in body", indexEdit);
+
+        const oldData = this.state.userList
+
+        oldData.splice(indexEdit, 1, {
+            id: data.id,
+            fullname: data.fullname,
+            username: data.username,
+            password: data.password,
+            address: data.address,
+            loginStatus: true
+        })
+
+        console.log("data after update body", this.state.userList);
     }
 
     deleteUser = id => {
@@ -191,13 +217,24 @@ export default class Body extends Component {
     }
 
     renderPage = () => {
-        const page = this.props.page
+        const { page, idLog } = this.props
 
 
         if (page === "register")
             return <Register regis={this.addUser} redirect={this.props.goToPage} />
         else if (page === "home")
-            return <User userList={this.state.userList} deleteUser={this.deleteUser} />
+            return <User
+                redirect={this.props.goToPage}
+                userList={this.state.userList}
+                editData={this.editUser}
+                idLog={idLog}
+                deleteUser={this.deleteUser} />
+        else if (page === "edit")
+            return <Edit 
+                updateUser={this.updateUser}
+                redirect={this.props.goToPage}
+                editData={this.state.newEdit}
+                />
         else
             return <Login logUser={this.loginUser} />
     }
@@ -207,6 +244,12 @@ export default class Body extends Component {
         for (let i = 0; i < listUser.length; i++) {
             console.log(listUser[i].fullname);
         }
+    }
+
+    componentWillUnmount = () => {
+        this.setState({
+            newEdit : ""
+        })
     }
 
     render() {
