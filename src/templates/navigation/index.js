@@ -17,13 +17,49 @@ export default class Navbar extends Component {
         return ""
     }
 
-    render() {
-        const { goToPage } = this.props
+    onCheckLogin = () => {
+        // const statusUser = this.props.checkUser.loginStatus
+        const { checkUser,goToPage } = this.props
+
+        console.log("cek status");
+
+        return (            
+            <Menu
+            isActivePage={this.checkActivePage("home")}
+            redirect={() => checkUser ? goToPage("home") : alert("Silahkan login dulu")}>
+                Home                
+            </Menu>
+        )
+    }
+
+    onCheckLogout = () => {
+        const { checkUser,goToPage, userLogout } = this.props
+
+        if (checkUser) 
+            return (
+                <Menu redirect={()=> userLogout()}>Logout</Menu>
+            )
         return (
-            <div className="navbar">
-                <Menu isActivePage={this.checkActivePage("home")} redirect={() => goToPage("home")}>Home</Menu>
+            <>
                 <Menu isActivePage={this.checkActivePage("Login")} redirect={() => goToPage("Login")}>Login</Menu>
                 <Menu isActivePage={this.checkActivePage("register")} redirect={() => goToPage("register")}>Register</Menu>
+            </>
+        )
+    }
+
+    render() {
+        // const { goToPage } = this.props
+        return (
+            <div className="navbar">
+                {/* <Menu 
+                isActivePage={this.checkActivePage("home")} 
+                redirect={() => goToPage("home")}>
+                    Home
+                </Menu> */}
+                {this.onCheckLogin()}
+                {this.onCheckLogout()}
+                {/* <Menu isActivePage={this.checkActivePage("Login")} redirect={() => goToPage("Login")}>Login</Menu>
+                <Menu isActivePage={this.checkActivePage("register")} redirect={() => goToPage("register")}>Register</Menu> */}
             </div>
         )
     }
