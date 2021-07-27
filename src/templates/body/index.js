@@ -37,7 +37,7 @@ export default class Body extends Component {
                     userList : json.map(user => {
                         return {
                             id : user.id,
-                            name : user.name,
+                            fullname : user.name,
                             username : user.username,
                             password : "12345",
                             address : user.address.city,
@@ -59,7 +59,8 @@ export default class Body extends Component {
                 ),
                 fullname : inputUser.fullname,
                 username : inputUser.username,
-                password : inputUser.password
+                password : inputUser.password,
+                address : inputUser.address
             }]
         })
         console.log("data regis",inputUser.fullname);

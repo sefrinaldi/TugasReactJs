@@ -46,7 +46,7 @@ class User extends Component {
                             return (
                                 <tr key={index}>
                                     <td align="center">{userlist.id}</td>
-                                    <td>{userlist.name}</td>
+                                    <td>{userlist.fullname}</td>
                                     <td>{userlist.username}</td>
                                     <td>{userlist.address}</td>
                                     <td align="center" width="200px">

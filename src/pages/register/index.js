@@ -5,21 +5,41 @@ export default class Register extends Component {
     registerUser = data => {
         data.preventDefault()
 
-        const user = {
-            fullname : data.target[0].value,
-            username : data.target[1].value,
-            password : data.target[2].value
-        }    
+        const dataName = data.target[0].value
+        const dataUser = data.target[1].value
+        const dataPass = data.target[2].value
+        const dataAdrs = data.target[3].value
 
-        this.props.regis(user)  
+        console.log(dataName);
+        console.log(dataUser);
+        console.log(dataPass);
+        console.log(dataAdrs);
         
-        alert("Registrasi berhasil")
+        const user = {
+            fullname : dataName,
+            username : dataUser,
+            password : dataPass ? dataPass : "12345",
+            address : dataAdrs
+        } 
+        
+        if (dataName && 
+        dataUser &&  
+        dataAdrs){
 
-        this.props.redirect("login")
+            this.props.regis(user)  
+            
+            alert("Registrasi berhasil")
+    
+            this.props.redirect("login")
+    
+            data.target.fullname.value = ""
+            data.target.username.value = ""
+            data.target.password.value = ""  
+            data.target.address.value = ""   
+        } else {
+            alert("Data Kosong")
+        }
 
-        data.target.fullname.value = ""
-        data.target.username.value = ""
-        data.target.password.value = ""     
     }
 
     render() {        
@@ -52,6 +72,13 @@ export default class Register extends Component {
                                 <td>:</td>
                                 <td>
                                     <input type="password" name="password" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Address</td>
+                                <td>:</td>
+                                <td>
+                                    <input type="text" name="address" />
                                 </td>
                             </tr>
                             <tr>
