@@ -12,7 +12,7 @@ class Edit extends Component {
     }
 
     editUser = data => {
-        data.preventDefault()
+        // data.preventDefault()
 
         // const newFullname = data.target.fullname.value
         // const newUsername = data.target.username.value

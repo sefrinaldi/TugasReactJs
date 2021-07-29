@@ -6,6 +6,14 @@
     background: #0b7dda;
 }
 
+.editbtn {
+    background-color: #5edb62;
+}
+
+.editbtn:hover {
+    background: #4CAF50;
+}
+
 .deletebtn {
     background-color: #f44336;
 }

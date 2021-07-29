@@ -61,6 +61,7 @@ class User extends Component {
                             <td>{user.gaji}</td>
                             <td align="center" width="200px">                                
                                 <button className="detailbtn" onClick={() => this.detailForm(user)}>Detail</button>                                
+                                <button className="editbtn" onClick={() => this.editForm(user)}>Edit</button>                                
                             </td>
                         </tr>
                     )
