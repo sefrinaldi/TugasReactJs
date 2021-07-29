@@ -7,69 +7,22 @@ class Detail extends Component {
     }
 
     renderUserList = () => {
-        const { userList, idLog } = this.props
+        const { userList, detailData } = this.props
 
-        const cekId = userList.filter(user => user.id === idLog)
-        const userRule = cekId[0].jabatan
-
-        console.log("data user di detail", userList);
-
-        if (userRule === "karyawan") {
-            return userList
-                .filter(user => user.jabatan === "karyawan")
-                .map((user, index) => {
-                    return (
-                        <tr key={index}>
-                            <td align="center">{user.id}</td>
-                            <td>{user.fullname}</td>
-                            <td>{user.username}</td>
-                            <td>{user.jabatan}</td>
-                            <td>{user.address}</td>
-                            <td>{user.gaji}</td>
-                            <td align="center" width="200px">                                
-                                <button className="editbtn" onClick={() => this.editForm(user)}>Edit</button>                                
-                            </td>
-                        </tr>
-                    )
-                })
-        }
-        else if (userRule === "manager"){            
-            return userList
-                .filter(user => user.jabatan !== "hrd")
-                .map((user, index) => {
-                    return (
-                        <tr key={index}>
-                            <td align="center">{user.id}</td>
-                            <td>{user.fullname}</td>
-                            <td>{user.username}</td>
-                            <td>{user.jabatan}</td>
-                            <td>{user.address}</td>
-                            <td>{user.gaji}</td>
-                            <td align="center" width="200px">                                
-                                <button className="editbtn" onClick={() => this.editForm(user)}>Edit</button>                                
-                            </td>
-                        </tr>
-                    )
-                })
-        }
-        else {
-            return userList                
-                .map((user, index) => {
-                    return (
-                        <tr key={index}>
-                            <td align="center">{user.id}</td>
-                            <td>{user.fullname}</td>
-                            <td>{user.username}</td>
-                            <td>{user.jabatan}</td>
-                            <td>{user.address}</td>
-                            <td>{user.gaji}</td>
-                            <td align="center" width="200px">                                
-                                <button className="editbtn" onClick={() => this.editForm(user)}>Edit</button>                                
-                            </td>
-                        </tr>
-                    )
-                })
-        }
+        return userList
+            .filter(user => user.id === detailData.id)
+            .map((user, index) => {
+                return (
+                    <tr key={index}>
+                        <td align="center">{user.id}</td>
+                        <td>{user.fullname}</td>
+                        <td>{user.username}</td>
+                        <td>{user.jabatan}</td>
+                        <td>{user.address}</td>
+                        <td>{user.gaji}</td>                        
+                    </tr>
+                )
+            })        
     }
 
     editForm = data => {
@@ -90,8 +43,7 @@ class Detail extends Component {
                             <td>Username</td>
                             <td>Jabatan</td>
                             <td>Address</td>
-                            <td>Gaji</td>
-                            <td>Action</td>
+                            <td>Gaji</td>                            
                         </tr>
                     </thead>
                     <tbody>

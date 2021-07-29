@@ -58,7 +58,8 @@ export default class Body extends Component {
                 }
             ],
             // userList: {},
-            newEdit: {}
+            newEdit: {},
+            newDetail: {}
         }
         // this.readApi = this.readApi.bind(this)
     }
@@ -188,6 +189,8 @@ export default class Body extends Component {
             loginStatus: this.state.userList[indexEdit].loginStatus
         })
 
+        alert("Gaji berhasil d update")
+
         console.log("data after update body", this.state.userList);
     }
 
@@ -201,6 +204,16 @@ export default class Body extends Component {
         this.setState({
             userList: newUser
         })
+    }
+
+    detailUser = data => {
+        // console.log("detail in body", data);
+
+        this.setState({
+            newDetail : data
+        })
+
+        this.props.goToPage("detail")
     }
 
     loginUser = data => {
@@ -282,6 +295,7 @@ export default class Body extends Component {
                 userList={this.state.userList}
                 editData={this.editUser}
                 idLog={idLog}
+                detailUser={this.detailUser}
                 deleteUser={this.deleteUser} />
         else if (page === "edit")
             return <Edit 
@@ -293,6 +307,7 @@ export default class Body extends Component {
             return <Detail 
                 redirect={this.props.goToPage}
                 userList={this.state.userList}
+                detailData={this.state.newDetail}
                 editData={this.editUser}
                 idLog={idLog}/>
         else
@@ -308,7 +323,8 @@ export default class Body extends Component {
 
     componentWillUnmount = () => {
         this.setState({
-            newEdit : ""
+            newEdit : "",
+            newDetail : ""
         })
     }
 

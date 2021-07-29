@@ -9,24 +9,69 @@ class User extends Component {
     }
 
     renderUserList = () => {
-        const userData = this.props.userList
+        const { userList, idLog } = this.props
 
-        // let rows = ""
+        const cekId = userList.filter(user => user.id === idLog)
+        const userRule = cekId[0].jabatan
 
-        console.log("userdata", userData.length);
-        for (let i = 0; i < userData.length; i++) {
+        console.log("data user di detail", userList);
 
-            // const id = userData[i].id
-            // const fullname = userData[i].fullname
-            // const username = userData[i].username
-            // rows +=
-            //     <tr>
-            //         <td>{id}</td>
-            //         <td>{fullname}</td>
-            //         <td>{username}</td>
-            //         <td></td>
-            //     </tr>
+        if (userRule === "karyawan") {
+            return userList
+                .filter(user => user.jabatan === "karyawan")
+                .map((user, index) => {
+                    return (
+                        <tr key={index}>
+                            <td align="center">{user.id}</td>
+                            <td>{user.fullname}</td>                            
+                            <td>{user.jabatan}</td>                            
+                            <td>{user.gaji}</td>
+                            <td align="center" width="200px">                                
+                                <button className="detailbtn" onClick={() => this.detailForm(user)}>Detail</button>                                
+                            </td>
+                        </tr>
+                    )
+                })
         }
+        else if (userRule === "manager"){            
+            return userList
+                .filter(user => user.jabatan !== "hrd")
+                .map((user, index) => {
+                    return (
+                        <tr key={index}>
+                            <td align="center">{user.id}</td>
+                            <td>{user.fullname}</td>                            
+                            <td>{user.jabatan}</td>                            
+                            <td>{user.gaji}</td>
+                            <td align="center" width="200px">                                
+                                <button className="detailbtn" onClick={() => this.detailForm(user)}>Detail</button>                                
+                            </td>
+                        </tr>
+                    )
+                })
+        }
+        else {
+            return userList                
+                .map((user, index) => {
+                    return (
+                        <tr key={index}>
+                            <td align="center">{user.id}</td>
+                            <td>{user.fullname}</td>                            
+                            <td>{user.jabatan}</td>                            
+                            <td>{user.gaji}</td>
+                            <td align="center" width="200px">                                
+                                <button className="detailbtn" onClick={() => this.detailForm(user)}>Detail</button>                                
+                            </td>
+                        </tr>
+                    )
+                })
+        }
+    }
+
+    detailForm = data => {
+        // console.log("detail in list",data);
+        const { detailUser } = this.props
+        detailUser(data)
     }
 
     editForm = data => {
@@ -44,44 +89,14 @@ class User extends Component {
                     <thead>
                         <tr>
                             <td>id</td>
-                            <td>Fullname</td>
-                            <td>Username</td>
-                            <td>Jabatan</td>
-                            <td>Address</td>
+                            <td>Fullname</td>                            
+                            <td>Jabatan</td>                            
                             <td>Gaji</td>
                             <td>Action</td>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.userList.map((userlist, index) => {
-                            // let buttonEdit;
-                            // let buttonDelete;
-                            
-                            // if (userlist.jabatan === "hrd"){
-                            //     buttonEdit = <button className="editbtn" onClick={()=> this.editForm(userlist)}>Edit</button>
-                            //     buttonDelete = <button className="deletebtn" onClick={()=> this.props.deleteUser(userlist.id)}>Delete</button>
-                            // }
-                            // else if (userlist.jabatan === "manager" && userlist.id === this.props.idLog)
-                            //     buttonDelete = <button className="deletebtn" onClick={()=> this.props.deleteUser(userlist.id)}>Delete</button>
-                            return (
-                                <tr key={index}>
-                                    <td align="center">{userlist.id}</td>
-                                    <td>{userlist.fullname}</td>
-                                    <td>{userlist.username}</td>
-                                    <td>{userlist.jabatan}</td>
-                                    <td>{userlist.address}</td>
-                                    <td>{userlist.gaji}</td>                                    
-                                    <td align="center" width="200px">
-                                        {/* <button>Edit</button>                                       
-                                        <button onClick={()=> this.props.deleteUser(userlist.id)}>Delete</button> */}
-                                        {/* {buttonEdit}
-                                        {buttonDelete} */}
-                                        <button className="editbtn" onClick={()=> this.editForm(userlist)}>Edit</button>
-                                        <button className="deletebtn" onClick={()=> this.props.deleteUser(userlist.id)}>Delete</button>
-                                    </td>
-                                </tr>
-                            );
-                        })}
+                        {this.renderUserList()}
                     </tbody>
                 </table>
 
