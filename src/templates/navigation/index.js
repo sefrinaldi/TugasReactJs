@@ -19,26 +19,41 @@ export default class Navbar extends Component {
 
     onCheckLogin = () => {
         // const statusUser = this.props.checkUser.loginStatus
-        const { checkUser,goToPage } = this.props
+        const { checkUser } = this.props
 
-        console.log("cek status");
+        // console.log("cek status");
 
         return (            
             <Menu
             isActivePage={this.checkActivePage("home")}
-            redirect={() => checkUser ? goToPage("home") : alert("Silahkan login dulu")}>
+            // redirect={() => checkUser.loginStatus && checkUser.jabatan !== "karyawan" ? goToPage("home") : alert("Silahkan login dulu")}>
+            redirect={() => checkUser.loginStatus ? this.onCheckRule() : alert("Silahkan login dulu")}>
                 Home                
             </Menu>
         )
     }
 
+    onCheckRule() {
+        const { checkUser, goToPage } = this.props
+
+        const rule = checkUser.jabatan
+
+        console.log("check rule",rule);
+
+        if (rule !== "karyawan")
+            return goToPage("home")
+        else 
+            return alert("halaman bisa di akses")
+    }
+
     onCheckLogout = () => {
         const { checkUser,goToPage, userLogout } = this.props
 
-        if (checkUser) 
+        if (checkUser.loginStatus) 
             return (
                 <>
                     <Menu redirect={()=> userLogout()}>Logout</Menu>
+                    <Menu isActivePage={this.checkActivePage("detail")} redirect={()=> goToPage("detail")}>Detail</Menu>
                     <Menu isActivePage={this.checkActivePage("edit")} redirect={() => goToPage("edit")}>Form</Menu>
                 </>
             )

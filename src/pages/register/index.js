@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { RowInput } from '../../components'
 
 export default class Register extends Component {
 
@@ -8,7 +9,8 @@ export default class Register extends Component {
         const dataName = data.target[0].value
         const dataUser = data.target[1].value
         const dataPass = data.target[2].value
-        const dataAdrs = data.target[3].value
+        const dataJabtn = data.target[3].value
+        const dataAdrs = data.target[4].value
 
         console.log(dataName);
         console.log(dataUser);
@@ -19,11 +21,13 @@ export default class Register extends Component {
             fullname : dataName,
             username : dataUser,
             password : dataPass ? dataPass : "12345",
+            jabatan : dataJabtn,
             address : dataAdrs
         } 
         
         if (dataName && 
-        dataUser &&  
+        dataUser &&
+        dataJabtn &&  
         dataAdrs){
 
             this.props.regis(user)  
@@ -35,6 +39,7 @@ export default class Register extends Component {
             data.target.fullname.value = ""
             data.target.username.value = ""
             data.target.password.value = ""  
+            data.target.jabatan.value = ""
             data.target.address.value = ""   
         } else {
             alert("Data Kosong")
@@ -53,34 +58,59 @@ export default class Register extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            {/* <tr>
                                 <td>Fullname</td>
                                 <td>:</td>
                                 <td>
                                     <input type="text" name="fullname" />
                                 </td>
-                            </tr>
-                            <tr>
+                            </tr> */}
+                            <RowInput 
+                                label="Fullname"
+                                nameInput="fullname"
+                                typeInput="text"
+                            />
+                            {/* <tr>
                                 <td>Username</td>
                                 <td>:</td>
                                 <td>
                                     <input type="text" name="username" />
-                                </td>
-                            </tr>
-                            <tr>
+                                </td>                                
+                            </tr> */}
+                            <RowInput 
+                                label="Username"
+                                nameInput="username"
+                                typeInput="text"
+                            />
+                            {/* <tr>
                                 <td>Password</td>
                                 <td>:</td>
                                 <td>
                                     <input type="password" name="password" />
                                 </td>
-                            </tr>
-                            <tr>
+                            </tr> */}                            
+                            <RowInput 
+                                label="Password"
+                                nameInput="password"
+                                typeInput="password"
+                            />
+                            {/* <tr>
                                 <td>Address</td>
                                 <td>:</td>
                                 <td>
                                     <input type="text" name="address" />
                                 </td>
-                            </tr>
+                            </tr> */}
+                            <RowInput 
+                                label="Jabatan"
+                                nameInput="jabatan"
+                                typeInput="text"
+                            />
+                            <RowInput 
+                                label="Address"
+                                nameInput="address"
+                                typeInput="text"
+                            />
                             <tr>
                                 <td colSpan="3" align="center">
                                     <button>Submit</button>

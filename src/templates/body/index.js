@@ -1,54 +1,86 @@
 import React, { Component } from 'react'
-import { Register, Login, User, Edit } from '../../pages'
+import { Register, Login, User, Edit, Detail } from '../../pages'
 
 export default class Body extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // userList: [
-            //     {           
-            //         id : 1,         
-            //         fullname: "Antoni",
-            //         username: "toni",
-            //         password: "password"
-            //     },
-            //     {          
-            //         id : 2,          
-            //         fullname : "Robi",
-            //         username : "robi",
-            //         password : "password"
-            //     },
-            //     {
-            //         id : 3,
-            //         fullname : "john",
-            //         username : "john",
-            //         password : "password"
-            //     }        
-            // ],
-            userList: {},
+            userList: [
+                {           
+                    id : 1,         
+                    fullname: "Antoni",
+                    username: "toni",
+                    password: "password",
+                    jabatan : "hrd",
+                    address : "Jakarta",
+                    gaji : 7000000,
+                    loginStatus: false
+                },
+                {          
+                    id : 2,          
+                    fullname : "Robi",
+                    username : "robi",
+                    password : "password",
+                    jabatan : "manager",
+                    address : "Karawang",
+                    gaji : 10000000,
+                    loginStatus: false
+                },
+                {
+                    id : 3,
+                    fullname : "john",
+                    username : "john",
+                    password : "password",
+                    jabatan : "karyawan",
+                    address : "Palembang",
+                    gaji : 5000000,
+                    loginStatus: false
+                },
+                {
+                    id : 4,
+                    fullname : "Lucy",
+                    username : "lucy",
+                    password : "password",
+                    jabatan : "karyawan",
+                    address : "Pekanbaru",
+                    gaji : 5000000,
+                    loginStatus: false
+                },
+                {
+                    id : 5,
+                    fullname : "Farhan",
+                    username : "farhan",
+                    password : "password",
+                    jabatan : "karyawan",
+                    address : "Jambi",
+                    gaji : 5000000,
+                    loginStatus: false
+                }
+            ],
+            // userList: {},
             newEdit: {}
         }
         // this.readApi = this.readApi.bind(this)
     }
 
-    componentDidMount = () => {
-        fetch('https://jsonplaceholder.typicode.com/users')
-            .then(response => response.json())
-            .then(json => {
-                this.setState({
-                    userList: json.map(user => {
-                        return {
-                            id: user.id,
-                            fullname: user.name,
-                            username: user.username,
-                            password: "12345",
-                            address: user.address.city,
-                            loginStatus: false
-                        }
-                    })
-                })
-            })
-    }
+    // componentDidMount = () => {
+    //     fetch('https://jsonplaceholder.typicode.com/users')
+    //         .then(response => response.json())
+    //         .then(json => {
+    //             this.setState({
+    //                 userList: json.map(user => {
+    //                     return {
+    //                         id: user.id,
+    //                         fullname: user.name,
+    //                         username: user.username,
+    //                         password: "12345",
+    //                         address: user.address.city,
+    //                         loginStatus: false
+    //                     }
+    //                 })
+    //             })
+    //         })
+    // }
 
     // readApi = () => {
     //     fetch('https://jsonplaceholder.typicode.com/users')
@@ -120,7 +152,9 @@ export default class Body extends Component {
                 fullname: inputUser.fullname,
                 username: inputUser.username,
                 password: inputUser.password,
-                address: inputUser.address
+                jabatan: inputUser.jabatan,
+                address: inputUser.address,                
+                loginStatus: false
             }]
         })
         console.log("data regis", inputUser.fullname);
@@ -148,8 +182,10 @@ export default class Body extends Component {
             fullname: data.fullname,
             username: data.username,
             password: data.password,
+            jabatan: data.jabatan,
             address: data.address,
-            loginStatus: true
+            gaji: data.gaji,
+            loginStatus: this.state.userList[indexEdit].loginStatus
         })
 
         console.log("data after update body", this.state.userList);
@@ -168,27 +204,41 @@ export default class Body extends Component {
     }
 
     loginUser = data => {
-        console.log(data);
+        console.log("data input", data);
 
         const dataLogin = this.state.userList.filter(user => user.username === data.dataUser && user.password === data.dataPass)
 
-        console.log("user yg log in", dataLogin);
-        // console.log("ini index", this.state.userList.findIndex(user => user.id === 7));        
+        if (dataLogin.length > 0){
+            const rule = dataLogin[0].jabatan;
+            console.log("rule",rule);
+    
+            console.log("user yg log in", dataLogin);
+            // console.log("ini index", this.state.userList.findIndex(user => user.id === 7));        
+    
+            if (data.dataUser === "")
+                return alert("Username Kosong")
+            else if (data.dataPass === "")
+                return alert("Password Kosong")
+            else if (dataLogin.length > 0) {
+                alert("Login Berhasil")
+                const { goToPage, updateLogin } = this.props
+                this.updateStatus(dataLogin[0])
+                // console.log("import app", dataLogin[0]);
+                updateLogin(dataLogin[0])
+                console.log("jabatan login", dataLogin[0].jabatan);
+    
+                if (dataLogin[0].jabatan !== "karyawan")
+                    return goToPage("home")
+                else 
+                    return goToPage("detail")
+            }
+            else
+                alert("Login Gagal")
 
-        if (data.dataUser === "")
-            return alert("Username Kosong")
-        else if (data.dataPass === "")
-            return alert("Password Kosong")
-        else if (dataLogin.length > 0) {
-            alert("Login Berhasil")
-            const { goToPage, updateLogin } = this.props
-            this.updateStatus(dataLogin[0])
-            console.log("import app", dataLogin[0]);
-            updateLogin(dataLogin[0])
-            return goToPage("home")
         }
-        else
-            alert("Login Gagal")
+        else{
+            alert("data not found!!!")
+        }
 
         // if (dataLogin.length > 0) {
         //     alert("Login Berhasil")
@@ -200,7 +250,7 @@ export default class Body extends Component {
     updateStatus = data => {
 
         const indexUser = this.state.userList.findIndex(user => user.id === data.id)
-        console.log("index", indexUser);
+        // console.log("index", indexUser);
 
         const oldData = this.state.userList
 
@@ -209,15 +259,19 @@ export default class Body extends Component {
             fullname: data.fullname,
             username: data.username,
             password: data.password,
+            jabatan: data.jabatan,
             address: data.address,
+            gaji: data.gaji,
             loginStatus: true
         })
 
-        console.log("data body", this.state.userList);
+        // console.log("data body", this.state.userList);
     }
 
     renderPage = () => {
         const { page, idLog } = this.props
+
+        // console.log("send to user", this.state.userList);
 
 
         if (page === "register")
@@ -235,6 +289,12 @@ export default class Body extends Component {
                 redirect={this.props.goToPage}
                 editData={this.state.newEdit}
                 />
+        else if (page === "detail")
+            return <Detail 
+                redirect={this.props.goToPage}
+                userList={this.state.userList}
+                editData={this.editUser}
+                idLog={idLog}/>
         else
             return <Login logUser={this.loginUser} />
     }
@@ -254,7 +314,7 @@ export default class Body extends Component {
 
     render() {
 
-        console.log("data", this.state.userList);
+        // console.log("data", this.state.userList);
         return (
             <div className="body">
                 {this.renderPage()}

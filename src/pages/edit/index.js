@@ -14,39 +14,38 @@ class Edit extends Component {
     editUser = data => {
         data.preventDefault()
 
-        const newFullname = data.target.fullname.value
-        const newUsername = data.target.username.value
-        const newPassword = data.target.password.value
-        const newAddress = data.target.address.value
+        // const newFullname = data.target.fullname.value
+        // const newUsername = data.target.username.value
+        // const newPassword = data.target.password.value
+        // const newAddress = data.target.address.value
+
+        const newGaji = data.target.gaji.value
 
         const user = {
             id: this.props.editData.id,
-            fullname: newFullname,
-            username: newUsername,
-            password: newPassword ? newPassword : "12345",
-            address: newAddress
-        }
+            fullname: this.props.editData.fullname,
+            username: this.props.editData.username,
+            password: this.props.editData.password,
+            jabatan: this.props.editData.jabatan,
+            address: this.props.editData.address,
+            gaji: newGaji
+        }            
 
-        
-
-        
-
-        if (newFullname &&
-            newUsername &&
-            newAddress) {
+        if (newGaji) {
 
             const { updateUser } = this.props
 
-            alert("Edit data berhasil")
+            // alert("Edit data berhasil")
+            console.log(newGaji);
 
             updateUser(user)
 
-            data.target.fullname.value = ""
-            data.target.username.value = ""
-            data.target.password.value = ""
-            data.target.address.value = ""
+            // data.target.fullname.value = ""
+            // data.target.username.value = ""
+            // data.target.password.value = ""
+            // data.target.address.value = ""
 
-            this.props.redirect('home')
+            this.props.redirect('detail')
         } else {
             alert("Data Kosong")
         }
@@ -84,29 +83,41 @@ class Edit extends Component {
                                 <td>Fullname</td>
                                 <td>:</td>
                                 <td>
-                                    <input type="text" name="fullname" defaultValue={editData.fullname} onChange={this.setValue} />
+                                    {/* <input type="text" name="fullname" defaultValue={editData.fullname} onChange={this.setValue} /> */}
                                     {/* <input type="text" name="fullname" /> */}
+                                    {editData.fullname}
                                 </td>
                             </tr>
                             <tr>
-                                <td>Username</td>
+                                {/* <td>Username</td>
                                 <td>:</td>
                                 <td>
                                     <input type="text" name="username" defaultValue={editData.username} onChange={this.setValue} />
-                                </td>
+                                </td> */}
+                                <td>Jabatan</td>
+                                <td>:</td>
+                                <td>{editData.jabatan}</td>
                             </tr>
-                            <tr>
+                            {/* <tr>
                                 <td>Password</td>
                                 <td>:</td>
                                 <td>
                                     <input type="password" name="password" onChange={this.setValue} />
                                 </td>
-                            </tr>
+                            </tr> */}
                             <tr>
                                 <td>Address</td>
                                 <td>:</td>
                                 <td>
-                                    <input type="text" name="address" defaultValue={editData.address} onChange={this.setValue} />
+                                    {/* <input type="text" name="address" defaultValue={editData.address} onChange={this.setValue} /> */}
+                                    {editData.address}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Gaji</td>
+                                <td>:</td>
+                                <td>
+                                    <input type="text" name="gaji" defaultValue={editData.gaji} />
                                 </td>
                             </tr>
                             <tr>

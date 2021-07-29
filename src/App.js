@@ -13,14 +13,16 @@ class App extends Component {
         fullname: "",
         username: "",
         password: "",
+        jabatan: "",
         address: "",
+        gaji: "",
         loginStatus: false
       }
     }
   }
 
   changePage = page => {
-    console.log("in App", page)
+    // console.log("in App", page)
     this.setState({
       currentPage: page
     })
@@ -39,7 +41,9 @@ class App extends Component {
         fullname: data.fullname,
         username: data.username,
         password: data.password,
+        jabatan: data.jabatan,
         address: data.address,
+        gaji: data.gaji,
         loginStatus: true
       }
     })    
@@ -53,7 +57,9 @@ class App extends Component {
         fullname: "",
         username: "",
         password: "",
+        jabatan: "",
         address: "",
+        gaji: "",
         loginStatus: false
       }
     })
@@ -68,7 +74,7 @@ class App extends Component {
           userLogout={this.userLogout}
           page={this.state.currentPage}
           goToPage={this.changePage}
-          checkUser={this.state.userLogin.loginStatus}
+          checkUser={this.state.userLogin}          
         />
         <Body
           idLog={this.state.userLogin.id}
