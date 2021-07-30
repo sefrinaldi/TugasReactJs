@@ -82,7 +82,7 @@ class Edit extends Component {
     }
 
     render() {
-        // const { editData } = this.props
+        const { editData } = this.props
         // console.log("in edit form", this.state.fullname);
         return (
             <div>
@@ -100,8 +100,8 @@ class Edit extends Component {
                                 <td>
                                     {/* <input type="text" name="fullname" defaultValue={editData.fullname} onChange={this.setValue} /> */}
                                     {/* <input type="text" name="fullname" /> */}
-                                    {/* {editData.fullname} */}
-                                    {this.state.fullname}
+                                    {editData.fullname}
+                                    {/* {this.state.fullname} */}
                                 </td>
                             </tr>
                             <tr>
@@ -113,8 +113,8 @@ class Edit extends Component {
                                 <td>Jabatan</td>
                                 <td>:</td>
                                 <td>
-                                    {/* {editData.jabatan} */}
-                                    {this.state.jabatan}
+                                    {editData.jabatan}
+                                    {/* {this.state.jabatan} */}
                                 </td>
                             </tr>
                             {/* <tr>
@@ -129,8 +129,8 @@ class Edit extends Component {
                                 <td>:</td>
                                 <td>
                                     {/* <input type="text" name="address" defaultValue={editData.address} onChange={this.setValue} /> */}
-                                    {/* {editData.address} */}
-                                    {this.state.address}
+                                    {editData.address}
+                                    {/* {this.state.address} */}
                                 </td>
                             </tr>
                             <tr>
