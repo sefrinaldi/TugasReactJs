@@ -5,10 +5,23 @@ class Edit extends Component {
         super(props);
         this.state = {
             fullname: "",
-            username: "",
-            password: "",
-            address: ""
+            // username: "",
+            // password: "",
+            jabatan: "",
+            address: "",
+            gaji: ""
         }
+    }
+
+    componentDidMount = () => {
+        const { editData } = this.props
+
+        this.setState({
+            fullname: editData.fullname,
+            jabatan: editData.jabatan,
+            address: editData.address,
+            gaji: editData.gaji
+        })
     }
 
     editUser = data => {
@@ -55,20 +68,22 @@ class Edit extends Component {
         this.setState({
             [data.target.name]: data.target.value
         })
-    }
+    }    
 
     componentWillUnmount = () => {
         this.setState({
             fullname: "",
-            username: "",
-            password: "",
-            address: ""
+            // username: "",
+            // password: "",
+            jabatan: "",
+            address: "",
+            gaji: ""
         })
     }
 
     render() {
-        const { editData } = this.props
-        console.log("in edit form", this.state.fullname);
+        // const { editData } = this.props
+        // console.log("in edit form", this.state.fullname);
         return (
             <div>
                 <form onSubmit={this.editUser}>
@@ -85,7 +100,8 @@ class Edit extends Component {
                                 <td>
                                     {/* <input type="text" name="fullname" defaultValue={editData.fullname} onChange={this.setValue} /> */}
                                     {/* <input type="text" name="fullname" /> */}
-                                    {editData.fullname}
+                                    {/* {editData.fullname} */}
+                                    {this.state.fullname}
                                 </td>
                             </tr>
                             <tr>
@@ -96,7 +112,10 @@ class Edit extends Component {
                                 </td> */}
                                 <td>Jabatan</td>
                                 <td>:</td>
-                                <td>{editData.jabatan}</td>
+                                <td>
+                                    {/* {editData.jabatan} */}
+                                    {this.state.jabatan}
+                                </td>
                             </tr>
                             {/* <tr>
                                 <td>Password</td>
@@ -110,14 +129,15 @@ class Edit extends Component {
                                 <td>:</td>
                                 <td>
                                     {/* <input type="text" name="address" defaultValue={editData.address} onChange={this.setValue} /> */}
-                                    {editData.address}
+                                    {/* {editData.address} */}
+                                    {this.state.address}
                                 </td>
                             </tr>
                             <tr>
                                 <td>Gaji</td>
                                 <td>:</td>
                                 <td>
-                                    <input type="text" name="gaji" defaultValue={editData.gaji} />
+                                    <input type="text" name="gaji" value={this.state.gaji} onChange={this.setValue} />
                                 </td>
                             </tr>
                             <tr>
