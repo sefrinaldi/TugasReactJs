@@ -67,7 +67,7 @@ class App extends Component {
   }
 
   render() {
-    console.log("data app", this.state.userLogin);
+    // console.log("data app", this.state.userLogin);
     return (
       <>
         <Navbar

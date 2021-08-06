@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import { Register, Login, User, Edit, Detail } from '../../pages'
+import UserService from "../../services/user"
 
-export default class Body extends Component {
+class Body extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -62,6 +64,16 @@ export default class Body extends Component {
             newDetail: {}
         }
         // this.readApi = this.readApi.bind(this)
+    }
+
+    componentDidMount = () => {
+        UserService.getAllUser()        
+        .then(res => res.data)
+        .then(json => {
+            json.map(user => {
+                return this.props.inputData(json)
+            })
+        })
     }
 
     // componentDidMount = () => {
@@ -189,6 +201,10 @@ export default class Body extends Component {
             loginStatus: this.state.userList[indexEdit].loginStatus
         })
 
+        this.setState({
+            userList: oldData,
+            newEdit: {}
+        }, ()=> this.props.goToPage("home"))
         alert("Gaji berhasil d update")
 
         console.log("data after update body", this.state.userList);
@@ -311,7 +327,7 @@ export default class Body extends Component {
                 editData={this.editUser}
                 idLog={idLog}/>
         else
-            return <Login logUser={this.loginUser} />
+            return <Login logUser={this.loginUser} redirect={this.props.goToPage} />
     }
 
     renderUser = () => {
@@ -330,7 +346,7 @@ export default class Body extends Component {
 
     render() {
 
-        // console.log("data", this.state.userList);
+        console.log("data api redux", this.props.dataUser);
         return (
             <div className="body">
                 {this.renderPage()}
@@ -339,3 +355,13 @@ export default class Body extends Component {
         )
     }
 }
+
+const mapStateToProps = state => ({
+    dataUser : state.Auth
+})
+
+const mapDispatchToProps = dispatch => ({
+    inputData : (newUser) => dispatch({ type: "GET_DATA", payload: { newUser } })
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Body)

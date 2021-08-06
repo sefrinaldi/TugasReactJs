@@ -58,7 +58,7 @@ class Edit extends Component {
             // data.target.password.value = ""
             // data.target.address.value = ""
 
-            this.props.redirect('home')
+            // this.props.redirect('home')
         } else {
             alert("Data Kosong")
         }
